@@ -87,3 +87,14 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+test.json
+train.json
+*.csv
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
