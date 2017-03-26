@@ -1,7 +1,21 @@
 from PIL import Image
-from os import listdir
+from os import listdir, chdir
 from os.path import isdir, join, isfile, getsize
-mypath = "images_sample"
+
+
+def getNumberOfPics(postingId):
+  fileList = [f for f in listdir(postingId) if isfile(f)]
+  numOfPics = len(fileList)
+  return numOfPics
+
+
+def getAverageSize(postingId):
+  sizeList = [getsize(f) for f in listdir(postingId) if isfile(f)]
+  if len(sizeList) == 0:
+    averageSize = 0
+  else:
+    averageSize = sum(sizeList) / len(sizeList)
+  return averageSize
 
 
 def getFileMetaData(picPath):
@@ -24,6 +38,9 @@ def getFileMetaData(picPath):
 
 
 if __name__ == '__main__':
-  mypath = 'images_sample'
-  fileMetaData = getFileMetaData(mypath)
-  print fileMetaData
+  chdir('/Users/f/scripts/renthop/images_sample')
+  postingIdList = [f for f in listdir('.') if isdir(f)]
+  for postingId in postingIdList:
+    print postingIdList
+    print getAverageSize(postingId)
+    print getNumberOfPics(postingId)
