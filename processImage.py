@@ -4,17 +4,35 @@ from os.path import isdir, join, isfile, getsize
 
 
 def getNumberOfPics(postingId):
-  fileList = [f for f in listdir(postingId) if isfile(f)]
+  fileList = [f for f in listdir(postingId) if isfile(join(postingId,f))]
   numOfPics = len(fileList)
   return numOfPics
 
 
 def getAverageSize(postingId):
-  sizeList = [getsize(f) for f in listdir(postingId) if isfile(f)]
+  sizeList = [getsize(join(postingId,f)) for f in listdir(postingId) if isfile(join(postingId, f))]
   if len(sizeList) == 0:
     averageSize = 0
   else:
     averageSize = sum(sizeList) / len(sizeList)
+  return averageSize
+
+
+def getMaxSize(postingId):
+  sizeList = [getsize(join(postingId,f)) for f in listdir(postingId) if isfile(join(postingId,f))]
+  if len(sizeList) == 0:
+    averageSize = 0
+  else:
+    averageSize = max(sizeList)
+  return averageSize
+
+
+def getMinSize(postingId):
+  sizeList = [getsize(join(postingId,f)) for f in listdir(postingId) if isfile(join(postingId,f))]
+  if len(sizeList) == 0:
+    averageSize = 0
+  else:
+    averageSize = min(sizeList)
   return averageSize
 
 
@@ -41,6 +59,4 @@ if __name__ == '__main__':
   chdir('/Users/f/scripts/renthop/images_sample')
   postingIdList = [f for f in listdir('.') if isdir(f)]
   for postingId in postingIdList:
-    print postingIdList
-    print getAverageSize(postingId)
-    print getNumberOfPics(postingId)
+    print "id: {}, average: {}, num of pics: {}, max: {}, min: {}".format(postingId,getAverageSize(postingId),getNumberOfPics(postingId),getMaxSize(postingId),getMinSize(postingId))
