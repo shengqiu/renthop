@@ -1,6 +1,8 @@
+# -*- coding: UTF-8 -*-
 from PIL import Image
 from os import listdir, chdir
 from os.path import isdir, join, isfile, getsize
+from dbFunctions import insertOne
 
 
 def getNumberOfPics(postingId):
@@ -59,4 +61,11 @@ if __name__ == '__main__':
   chdir('/Users/f/scripts/renthop/images_sample')
   postingIdList = [f for f in listdir('.') if isdir(f)]
   for postingId in postingIdList:
-    print "id: {}, average: {}, num of pics: {}, max: {}, min: {}".format(postingId,getAverageSize(postingId),getNumberOfPics(postingId),getMaxSize(postingId),getMinSize(postingId))
+    temp = {
+      'postingId': postingId,
+      'average size': getAverageSize(postingId),
+      'number of pics': getNumberOfPics(postingId),
+      'max size': getMaxSize(postingId),
+      'min size': getMinSize(postingId)
+    }
+    insertOne(temp)
