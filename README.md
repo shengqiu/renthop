@@ -1,5 +1,4 @@
 # 'listing_id'
-
 - the listing ID
 # '_id'
 
